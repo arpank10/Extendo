@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h1> your contribution is welcome. update this blog</h1>
+<h1>{{ blog.name }}</h1>
+<p><strong>Current Description:</strong></p>
+
+<p style="white-space:pre-wrap;">{{ blog.description }}</p>
+
+<form  method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="so far so good" />
+</form>
+
+{% endblock %}

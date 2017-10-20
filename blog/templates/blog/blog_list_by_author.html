@@ -1,0 +1,26 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<center>
+
+    <h1>Author: {{blogger}}</h1>
+
+    <h4 class="post_subtitle">
+      Stories written:
+{{blog_list.count}} </h4>
+    {% if blog_list %}
+    <h3>Stories initiated:</h3>
+    <ul>
+
+      {% for blog in blog_list %}
+      <li>
+        <h3 class="post_subtitle"><a href="{{ blog.get_absolute_url }}">{{ blog.name }}</a> ({{blog.post_date}})</a></h3>
+      </li>
+      {% endfor %}
+
+    </ul>
+
+    {% else %}
+      <h3 class="post_subtitle"><p>This author hasn't posted anything yet.</p></h3>
+    {% endif %}
+{% endblock %}

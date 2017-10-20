@@ -1,0 +1,25 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<center><b>
+    <h1>All writers</h1>
+    <h3 class="post-subtitle">
+
+    {% if blogauthor_list %}
+<ul style="list-style-type: none";>
+
+      {% for author in blogauthor_list %}
+<li>
+        <a href="{% url 'blogs-by-author' author.pk %}">{{ author }}</a></li>
+
+      {% endfor %}
+</ul>
+
+    {% else %}
+      <p>There are no writers yet.</p>
+
+    </h3>
+    {% endif %}
+    </b>
+  </center>
+{% endblock %}
