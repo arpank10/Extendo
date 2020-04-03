@@ -1,11 +1,12 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<center>
-    <p><h1>Here you go...</h1></p>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
-    </form>
-  </center>
+    <center>
+        <p>
+        <h1>Here you go...</h1></p>
+        <form method="POST" class="post-form">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-default">Save</button>
+        </form>
+    </center>
 {% endblock %}

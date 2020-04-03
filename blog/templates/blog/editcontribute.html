@@ -1,19 +1,20 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<center>
+    <center>
 
-<h1 style="font-family:serif;"><b> Your contribution is welcome!<br>Update this blog</b></h1>
-<h1><b>{{ blog.name }}</b></h1>
-<h3><p><strong>Current Description:</strong></p></h3>
+        <h1 style="font-family:serif;"><b> Your contribution is welcome!<br>Update this blog</b></h1>
+        <h1><b>{{ blog.name }}</b></h1>
+        <h3><p><strong>Current Description:</strong></p></h3>
 
-<h4><p style="white-space:pre-wrap; font-family:courier;">{{ blog.description }}</p></h4>
+        <h4><p style="white-space:pre-wrap; font-family:courier;">{{ blog.description }}</p></h4>
 
-<form  method="post">
-    {% csrf_token %}
-    {{ form }}
-    <br>
-    <input type="submit" value="Done editing" style="font-size: 16px;color:black;background-color:#e7e7e7;border:2px solid #336600;padding: 12px 28px;border-radius: 8px;"/>
-</form>
-</center>
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <br>
+            <input type="submit" value="Done editing"
+                   style="font-size: 16px;color:black;background-color:#e7e7e7;border:2px solid #336600;padding: 12px 28px;border-radius: 8px;"/>
+        </form>
+    </center>
 {% endblock %}

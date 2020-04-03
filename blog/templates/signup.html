@@ -1,23 +1,23 @@
 {% extends 'base_generic.html' %}
 
 {% block content %}
-<center>
-  <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {% for field in form %}
-      <p>
-        {{ field.label_tag }}<br>
-        {{ field }}
-        {% if field.help_text %}
+    <center>
+        <h2>Sign up</h2>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <p>
+                    {{ field.label_tag }}<br>
+                    {{ field }}
+                    {% if field.help_text %}
 
-        {% endif %}
-        {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
-        {% endfor %}
-      </p>
-    {% endfor %}
-    <button type="submit" style="background-color: #555555;
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <p style="color: red">{{ error }}</p>
+                    {% endfor %}
+                </p>
+            {% endfor %}
+            <button type="submit" style="background-color: #555555;
     color: white;background-color: white;
     color: black;
     border: 2px solid #555555;background-color: #555555; /* Green */
@@ -31,7 +31,8 @@
     margin: 4px 2px;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
-    cursor: pointer;">Sign up</button>
-  </form>
-</center>
+    cursor: pointer;">Sign up
+            </button>
+        </form>
+    </center>
 {% endblock %}

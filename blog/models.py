@@ -1,25 +1,24 @@
-from django.db import models
-
-# Create your models here.
-
 from datetime import date
 
+from django.contrib.auth.models import User  # Blog author or commenter
+from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse  # Used to generate URLs by reversing the URL patterns
-from django.contrib.auth.models import User  # Blog author or commenter
+
+
+# Create your models here.
 
 
 class BlogAuthor(models.Model):
     """
     Model representing a blogger.
     """
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True,related_name='profile')
-    #bio = models.ForeignKey(User, on_delete=models.SET_NULL, null=True,related_name='profile'))
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='profile')
+    # bio = models.ForeignKey(User, on_delete=models.SET_NULL, null=True,related_name='profile'))
     location = models.CharField(max_length=30, blank=True)
-    birth_date = models.DateField(null=True, blank=True,default=date.today)
+    birth_date = models.DateField(null=True, blank=True, default=date.today)
     email_confirmed = models.BooleanField(default=False)
-
 
     def get_absolute_url(self):
         """
@@ -37,14 +36,11 @@ class BlogAuthor(models.Model):
             return self.user.username
 
 
-
 @receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):
     if created:
         BlogAuthor.objects.create(user=instance)
     instance.profile.add()
-
-
 
 
 class Blog(models.Model):
@@ -53,12 +49,12 @@ class Blog(models.Model):
     """
     name = models.CharField(max_length=200)
     author = models.ForeignKey(BlogAuthor, on_delete=models.SET_NULL, null=True)
-    category = models.CharField(max_length=50,default="Not Defined")
+    category = models.CharField(max_length=50, default="Not Defined")
     # author = models.ForeignKey(User)
     # Foreign Key used because Blog can only have one author/User, but bloggsers can have multiple blog posts.
-    description = models.TextField( help_text="Enter you blog text here.",)
+    description = models.TextField(help_text="Enter you blog text here.", )
     post_date = models.DateField(default=date.today)
-    othercontributors=models.ManyToManyField(BlogAuthor, related_name='+',)
+    othercontributors = models.ManyToManyField(BlogAuthor, related_name='+', )
 
     def __str__(self):
         return self.othercontributors

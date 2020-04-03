@@ -1,20 +1,19 @@
+from django.contrib.auth import login
+from django.contrib.auth.models import User  # Blog author or commenter
 from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import EmailMessage
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
-
 # Create your views here.
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-
 from django.views import generic
 
 from blog.tokens import account_activation_token
-from .models import Blog, BlogAuthor, BlogComment
-from django.contrib.auth.models import User  # Blog author or commenter
 from .forms import inputform, SignUpForm, editform
+from .models import Blog, BlogAuthor, BlogComment
 
 
 def signup(request):
@@ -35,7 +34,7 @@ def signup(request):
             to_email = form.cleaned_data.get('email')
             email = EmailMessage(subject, message, to=[to_email])
             email.send()
-            #user.email_user(subject, message)
+            # user.email_user(subject, message)
             return redirect('account_activation_sent')
     else:
         form = SignUpForm()
@@ -66,19 +65,18 @@ def post_new(request):
     if request.method == "POST":
         form = inputform(data=request.POST)
 
-
         if form.is_valid():
 
-                blog = form.save(commit=False)
-                length=len((blog.description.split()))
-                if length<10:
-                    # form = inputform()
+            blog = form.save(commit=False)
+            length = len((blog.description.split()))
+            if length < 10:
+                # form = inputform()
                 # blog.author = request.user
-                    my_p = BlogAuthor.objects.get(user=request.user)
-                    blog.author = my_p
-                    blog.post_date = timezone.now()
-                    blog.save()
-                    return redirect('blog-detail', pk=blog.pk)
+                my_p = BlogAuthor.objects.get(user=request.user)
+                blog.author = my_p
+                blog.post_date = timezone.now()
+                blog.save()
+                return redirect('blog-detail', pk=blog.pk)
 
     else:
         form = inputform()
@@ -90,17 +88,16 @@ def blog_edit(request, pk):
     if request.method == "POST":
         form = editform(request.POST)
         if form.is_valid():
-            #blog = form.save(commit=False)
-            #blog.author = request.user
-            #blog.podt_date = timezone.now()
-            currentblogauthor= BlogAuthor.objects.get(user=request.user)
+            # blog = form.save(commit=False)
+            # blog.author = request.user
+            # blog.podt_date = timezone.now()
+            currentblogauthor = BlogAuthor.objects.get(user=request.user)
             if (currentblogauthor not in blog.othercontributors.all()) and (currentblogauthor != blog.author):
                 contenttobeadded = form.cleaned_data['Edit']
-                blog.description+=" "+contenttobeadded
+                blog.description += " " + contenttobeadded
                 blog.save()
 
-
-                if (currentblogauthor !=blog.author):
+                if (currentblogauthor != blog.author):
                     blog.othercontributors.add(currentblogauthor)
                 return redirect('blog-detail', pk=blog.pk)
             else:
@@ -108,11 +105,11 @@ def blog_edit(request, pk):
 
     else:
         form = editform()
-    context={
-      'blog':blog,
-      'form' : form
+    context = {
+        'blog': blog,
+        'form': form
     }
-    return render(request, 'blog/editcontribute.html', context )
+    return render(request, 'blog/editcontribute.html', context)
 
 
 def index(request):
@@ -124,7 +121,7 @@ def index(request):
     blog_list = Blog.objects.all()
     return render(
         request,
-        'index.html',{'blog_list':blog_list}
+        'index.html', {'blog_list': blog_list}
     )
 
 

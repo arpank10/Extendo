@@ -2,30 +2,31 @@
 {% load staticfiles %}
 <html lang="en">
 <script>
-$(function () {
-    $('body').show();
-});
+    $(function () {
+        $('body').show();
+    });
 </script>
 <head>
 
-  <!-- {% block title %}<title>welcome</title>{% endblock %} -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <!-- {% block title %}<title>welcome</title>{% endblock %} -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
 
-  <!-- Custom fonts for this template -->
+    <!-- Custom fonts for this template -->
 
 
+    <!-- Add additional CSS in static file -->
 
-  <!-- Add additional CSS in static file -->
 
-
-  <link href="{% static 'css/clean-blog.min.css' %}" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="{% static 'css/clean-blog.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+          rel='stylesheet' type='text/css'>
 
     <!-- Bootstrap core JavaScript -->
     <script src="{% static 'vendor/popper/popper.min.js' %}"></script>
@@ -34,17 +35,17 @@ $(function () {
     <script src="{% static 'js/clean-blog.min.js' %}"></script>
 
     <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 
-  <!-- <nav class="navbar navbar-default">
+<!-- <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
 
@@ -57,38 +58,40 @@ $(function () {
       </ul>
     </div>
   </nav> -->
-  <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div id="navb" class="navbar-header">
-                  <a class="navbar-brand" href="{% url 'index' %}">Extendo</a>
-            </div>
-         <ul  id="list" class="nav navbar-nav navbar-right">
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div id="navb" class="navbar-header">
+            <a class="navbar-brand" href="{% url 'index' %}">Extendo</a>
+        </div>
+        <ul id="list" class="nav navbar-nav navbar-right">
             <li class="all blogs"><a href="{% url 'blogs' %}">All Posts</a></li>
             <li class="all bloggers"><a href="{% url 'bloggers' %}">All Writers</a></li>
             {% if user.is_authenticated %}
-                <li class="username"><a href="{% url 'index'%}?next={{self.path}}">{{ user.get_username }}</a></li>
-                <li class="logout"><a class="logout-link" href="{% url 'logout'%}?next={{self.path}}">Logout</a> </li>
+                <li class="username"><a href="{% url 'index' %}?next={{ self.path }}">{{ user.get_username }}</a></li>
+                <li class="logout"><a class="logout-link" href="{% url 'logout' %}?next={{ self.path }}">Logout</a></li>
             {% else %}
-              <li class="login"><a class="login-link" href="{% url 'login'%}?next={{self.path}}">Login</a></li>
-              <li class="signup"><a class="signup-link" href="{% url 'signup'%}?next={{self.path}}">Sign Up</a></li>
+                <li class="login"><a class="login-link" href="{% url 'login' %}?next={{ self.path }}">Login</a></li>
+                <li class="signup"><a class="signup-link" href="{% url 'signup' %}?next={{ self.path }}">Sign Up</a>
+                </li>
             {% endif %}
-          </ul>
-       </div>
+        </ul>
+    </div>
 </nav>
 
-<header class="masthead" style="background-image: url( https://static-ssl.businessinsider.com/image/579280c8dd0895cb0c8b4b1d-2400/apple-iphone-smartphone-desk.jpg )">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-        <div class="site-heading">
-          <h1>Welcome to Extendo</h1>
-          <span class="subheading">Let your ideas be more creative!</span>
+<header class="masthead"
+        style="background-image: url( https://static-ssl.businessinsider.com/image/579280c8dd0895cb0c8b4b1d-2400/apple-iphone-smartphone-desk.jpg )">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1>Welcome to Extendo</h1>
+                    <span class="subheading">Let your ideas be more creative!</span>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </header>
-  <!-- <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+<!-- <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
     <div class="container">
       <a class="navbar-brand" href="{% url 'index' %}">Home</a>
       <a class="navbar-brand" href="{% url 'blogs' %}">All Blogs</a>
@@ -120,13 +123,13 @@ $(function () {
     </div>
   </nav> -->
 
-  <!-- Page Header -->
+<!-- Page Header -->
 
-  {% block content %}
+{% block content %}
 
-  {% endblock %}
-  <p align="right">
-  <small class="credit">Made with ♥ by <b>Crusaders</b></small></p>
+{% endblock %}
+<p align="right">
+    <small class="credit">Made with ♥ by <b>Crusaders</b></small></p>
 
 
 </body>

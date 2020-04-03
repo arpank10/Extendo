@@ -3,13 +3,13 @@
 from __future__ import unicode_literals
 
 import datetime
+
+import django.db.models.deletion
 from django.conf import settings
 from django.db import migrations, models
-import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -35,7 +35,8 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('bio', models.TextField(help_text='Enter your bio details here.', max_length=400)),
                 ('email_confirmed', models.BooleanField(default=False)),
-                ('user', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL)),
+                ('user', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL,
+                                           to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
@@ -44,7 +45,8 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('description', models.TextField(help_text='Enter comment about blog here.', max_length=1000)),
                 ('post_date', models.DateTimeField(auto_now_add=True)),
-                ('author', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL)),
+                ('author', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL,
+                                             to=settings.AUTH_USER_MODEL)),
                 ('blog', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='blog.Blog')),
             ],
             options={
